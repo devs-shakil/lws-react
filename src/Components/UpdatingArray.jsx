@@ -38,6 +38,7 @@ const UpdatingArray = () => {
         }
     ]
     // console.log("arrayFromBackend", arrayFromBackend);
+    let nextTe = 3;
     const [nameB, setNameB] = useState(arrayFromBackend);
     // console.log("nameB",nameB);
     let initialShape = [
@@ -75,8 +76,32 @@ const handleCounter = (index) =>{
         
     });
     setCounters(nextCounters)
-}
-
+} 
+      
+    const initialteacher = [
+        { id: 0, name: 'Rahim' },
+        { id: 1, name: 'Kamal'},
+        { id: 2, name: 'peskar'},
+    ];
+    const [teacher, setTeacher] = useState('');
+    const [oldTeacher, setOldTeacher]= useState(initialteacher);
+    function handleTeacher() {
+       
+        console.log(nextTe);
+        console.log("oldTeacher", oldTeacher);
+        console.log("teacher", teacher)
+        const inserrtAt = 1;
+        const nextTeacher = [
+            ...oldTeacher.slice(0,inserrtAt),
+            {id:nextTe++,name:teacher},
+            ...oldTeacher.slice(inserrtAt)
+        ];
+        setOldTeacher(nextTeacher);
+        setTeacher('');
+        // nextTe++;
+        console.log(nextTe)
+        
+    }
     return (
         <div>
            <div>
@@ -194,6 +219,23 @@ const handleCounter = (index) =>{
                     ))}
                     <li></li>
                 </ul>
+            </div>
+            <div>
+                   <input type="text" 
+                        className='border-2 border-gray-500  '
+                        value={teacher}
+                        onChange={(e)=> setTeacher(e.target.value)}
+                   />  
+                   <button onClick={handleTeacher}>Insert</button>   
+                   <ul>
+                        {
+                            oldTeacher.map((singleTeacher) =>(
+                                <li key={singleTeacher.id}>
+                                    {singleTeacher.name}{singleTeacher.id}
+                                </li>
+                            ))
+                        }
+                   </ul>
             </div>
         </div>
 
